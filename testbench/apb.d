@@ -274,7 +274,7 @@ class apb_fifo_seq(uint ADDRW, uint DATAW): apb_seq!(ADDRW, DATAW)
     uvm_info("APB SEQ", format("\n%s", req.sprint()), UVM_DEBUG);
     
     _data = req.data;
-    File rdata = File("/home/utkarsh/Project_work/Interactive Register Debug/apb_slave/testbench/data.txt","a+");
+    File rdata = File("../testbench/data.txt","a+");
     rdata.writeln(_data);
     @trusted void flush();
     // uvm_info("apb_rw", "Finishing sequence", UVM_MEDIUM);
@@ -292,7 +292,7 @@ class apb_socket_seq(uint ADDRW, uint DATAW): apb_seq!(ADDRW, DATAW)
 
   bool _swapRequired;
   ushort _version;
-  uint _id;
+  uint _id; 
   
   
   struct TrHeader {
