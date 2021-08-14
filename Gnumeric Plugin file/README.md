@@ -1,12 +1,10 @@
-# Interactive-Register-Debugging
-**wiki Link**: https://wiki.coverify.com/Register-Verification-using-Gnumeric <br>
-**NOTE**: This implementation is for Gnumeric 1.12.46, updated release for version 1.12.48 will be released soon.<br/>
+# Interactive Register Debugging using Linux FIFOs
 **Pre-requisites to be installed**: EUVM, Icarus Verilog, Gnumeric, GCC
 ## Steps to be followed
 1. Clone this repository to your working directory
 ```
 $cd path/to/your/working/directory 
-$git clone  https://github.com/utkarshb1/Interactive-Register-Debugging.git
+$git clone  https://github.com/utkarshb1/Register-Debug-using-APB.git
 ```
 2. Setting up plugins for Gnumeric <br/>
 2.1 Make sure gnumeric is installed, if not run `sudo apt install gnumeric` in terminal <br/>
@@ -20,20 +18,19 @@ $mkdir ~/.gnumeric/(version)/plugins
 $mkdir ~/.gnumeric/(version)/plugins/myfunc 
 $cd ~/.gnumeric/(version)/plugins/myfuncs/ 
 ```
-Go to `path/to/your/working/directory/Interactive-Register-Debugging/apb_slave/testbench` and open file `apb.d`. In this file at line 278, change the file location to `path/to/working/directory/Interactive-Register-Debugging/apb_slave/testbench/data.txt`
 
-In the `path/to/your/working/directory/Interactive-Register-Debugging/Main_code`, there's a `reg_vf.py` file, change the file locations of the fifos at line 30 and 31 to <br>
-`apb_fifo = path/to/your/working/directory/Interactive-Register-Debugging/apb_slave/sim/qemu_apb_req.fifo` and <br>
-`fifo_read = path/to/your/working/directory/Interactive-Register-Debugging/apb_slave/testbench/data.txt` respectively.
+In the `path/to/your/working/directory/Register-Debug-using-APB/Gnumeric Plugin File/`, there's a `reg_vf.py` file, change the file locations of the fifos at line 30 and 31 to <br>
+`apb_fifo = path/to/your/working/directory/Register-Debug-using-APB/sim/qemu_apb_req.fifo` and <br>
+`fifo_read = path/to/your/working/directory/Register-Debug-using-APB/testbench/data.txt` respectively.
 
-Copy the plugin files from the Main_code directory to the plugin directory
+Now copy the plugin files from the `Gnumeric Plugin File` directory to the plugin directory created above in step 2.3.
 ```
-$cp path/to/your/working/directory/Interactive-Register-Debugging/Main_code/reg_vf.py /home/user/.gnumeric/(version)/plugins/myfuncs/reg_vf.py
-$cp path/to/your/working/directory/Interactive-Register-Debugging/Main_code/plugin.xml /home/user/.gnumeric/(version)/plugins/myfuncs/plugin.xml
+$cp path/to/your/working/directory/Register-Debug-using-APB/Gnumeric Plugin File/reg_vf.py /home/user/.gnumeric/(version)/plugins/myfuncs/reg_vf.py
+$cp path/to/your/working/directory/Register-Debug-using-APB/Gnumeric Plugin File/plugin.xml /home/user/.gnumeric/(version)/plugins/myfuncs/plugin.xml
 ```
 
 
-3. Change the current directory to the following: `$cd path/to/your/working/directory/Interactive-Register-Debugging/apb_slave/sim/` 
+3. Change the current directory to the following: `$cd path/to/your/working/directory/Register-Debug-using-APB/sim/` 
 
 You can see various files in this directory.<br/>
 3.1 To compile and run the Simulation, open terminal in this directory and run following commands:
@@ -43,11 +40,9 @@ make
 make run 
 ```
 
- **Note**: Make sure that EUVM is in your PATH, example `echo $PATH` = `/home/user/Intern_Project/euvm-1.0-beta14/bin`:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+ **Note**: Make sure that EUVM is in your PATH, example `echo $PATH` = `/home/user/Intern_Project/euvm-1.0-beta14/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin`
 
-4. In /sim/ directory, there’s file named :
-
-`apb_registers.gnumeric`
+4. In /sim/ directory, there’s file named : `apb_registers.gnumeric`
 
 Open this file which will look like this:
 
